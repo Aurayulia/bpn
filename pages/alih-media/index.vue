@@ -152,8 +152,6 @@
             {{ kel.nama_kelurahan }}
           </option>
         </select>
-        <label><strong>Nama Pemohon</strong></label>
-        <input v-model="newItem.nama_pemohon" type="text" />
         <label><strong>Petugas Pemetaan</strong></label>
         <select v-model="newItem.petugas_pemetaan_id">
           <option disabled value="">Pilih Petugas</option>
