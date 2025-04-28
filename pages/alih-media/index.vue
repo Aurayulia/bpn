@@ -69,7 +69,7 @@
               <td>{{ alih_media.kecamatan?.nama_kecamatan }}</td>
               <td>{{ alih_media.kelurahan?.nama_kelurahan }}</td>
               <td>{{ alih_media.nama_pemohon }}</td>
-              <td>{{ alih_media.petugas_pemetaan?.nama }}</td>
+              <td>{{ alih_media.petugas_pemetaann?.nama }}</td>
               <td>{{ formatDate(alih_media.tanggal_pemetaan) }}</td>
               <td>
                 <button class="btn-edit" @click="openPopup(alih_media)">Edit</button>
@@ -112,7 +112,7 @@
         <label><strong>Nama Pemohon</strong></label>
         <input v-model="editItem.nama_pemohon" type="text" />
         <label><strong>Petugas Pemetaan</strong></label>
-        <select v-model="editItem.petugas_pemetaan_id">
+        <select v-model="editItem.petugas_pemetaann_id">
           <option disabled value="">Pilih Petugas</option>
           <option v-for="petugas in petugasList" :key="petugas.id" :value="petugas.id">
             {{ petugas.nama }}
@@ -159,7 +159,7 @@
         <label><strong>Nama Pemohon</strong></label>
         <input v-model="newItem.nama_pemohon" type="text" />
         <label><strong>Petugas Pemetaan</strong></label>
-        <select v-model="newItem.petugas_pemetaan_id">
+        <select v-model="newItem.petugas_pemetaann_id">
           <option disabled value="">Pilih Petugas</option>
           <option v-for="petugas in petugasList" :key="petugas.id" :value="petugas.id">
             {{ petugas.nama }}
@@ -203,7 +203,7 @@ const newItem = ref({
   kecamatan_id: '',
   kelurahan_id: '',
   nama_pemohon: '',
-  petugas_pemetaan_id: '',
+  petugas_pemetaann_id: '',
   tanggal_pemetaan: '',
   keterangan: '',
   tanggal_penyelesaian: ''
@@ -215,7 +215,7 @@ const fetchData = async () => {
     .select(`*
       , kecamatan: kecamatan_id (id, nama_kecamatan)
       , kelurahan: kelurahan_id (id, nama_kelurahan)
-      , petugas_pemetaan: petugas_pemetaan_id (id, nama)
+      , petugas_pemetaann: petugas_pemetaann_id (id, nama)
     `)
   if (!error) alihMediaData.value = data
   else console.error('Gagal mengambil data:', error)
@@ -231,7 +231,7 @@ const fetchDropdownData = async () => {
   const kelurahan = await supabase.from('kelurahan').select('id, nama_kelurahan, kecamatan_id')
   if (!kelurahan.error) kelurahanList.value = kelurahan.data
 
-  const petugas = await supabase.from('petugas_pemetaan').select('id, nama')
+  const petugas = await supabase.from('petugas_pemetaann').select('id, nama')
   if (!petugas.error) petugasList.value = petugas.data
 }
 
@@ -247,7 +247,7 @@ const openPopup = (item) => {
     kecamatan_id: item.kecamatan?.id || '',
     kelurahan_id: item.kelurahan?.id || '',
     nama_pemohon: item.nama_pemohon,
-    petugas_pemetaan_id: item.petugas_pemetaan?.id || '',
+    petugas_pemetaann_id: item.petugas_pemetaann?.id || '',
     tanggal_pemetaan: item.tanggal_pemetaan,
     tanggal_penyelesaian: item.tanggal_penyelesaian
   }
@@ -255,7 +255,7 @@ const openPopup = (item) => {
 }
 
 const saveEdit = async () => {
-  const { id, jenis_hak, no_sertifikat, kecamatan_id, kelurahan_id, nama_pemohon, petugas_pemetaan_id, tanggal_pemetaan, tanggal_penyelesaian } = editItem.value
+  const { id, jenis_hak, no_sertifikat, kecamatan_id, kelurahan_id, nama_pemohon, petugas_pemetaann_id, tanggal_pemetaan, tanggal_penyelesaian } = editItem.value
 
   await supabase.from('alih_media').update({
     jenis_hak,
@@ -263,7 +263,7 @@ const saveEdit = async () => {
     kecamatan_id: parseInt(kecamatan_id) || null,
     kelurahan_id: parseInt(kelurahan_id) || null,
     nama_pemohon,
-    petugas_pemetaan_id: parseInt(petugas_pemetaan_id) || null,
+    petugas_pemetaann_id: parseInt(petugas_pemetaann_id) || null,
     tanggal_pemetaan,
     tanggal_penyelesaian
   }).eq('id', id)
@@ -280,7 +280,7 @@ const saveNewItem = async () => {
     kecamatan_id: parseInt(newItem.value.kecamatan_id) || null,
     kelurahan_id: parseInt(newItem.value.kelurahan_id) || null,
     nama_pemohon: newItem.value.nama_pemohon,
-    petugas_pemetaan_id: parseInt(newItem.value.petugas_pemetaan_id) || null,
+    petugas_pemetaann_id: parseInt(newItem.value.petugas_pemetaann_id) || null,
     tanggal_pemetaan: newItem.value.tanggal_pemetaan || null,
     keterangan: newItem.value.keterangan,
     tanggal_penyelesaian: newItem.value.tanggal_penyelesaian || null
@@ -295,7 +295,7 @@ const saveNewItem = async () => {
       kecamatan_id: '',
       kelurahan_id: '',
       nama_pemohon: '',
-      petugas_pemetaan_id: '',
+      petugas_pemetaann_id: '',
       tanggal_pemetaan: '',
       keterangan: '',
       tanggal_penyelesaian: ''
@@ -331,7 +331,7 @@ const filteredData = computed(() => {
       item.nama_pemohon,
       item.kecamatan?.nama_kecamatan,
       item.kelurahan?.nama_kelurahan,
-      item.petugas_pemetaan?.nama,
+      item.petugas_pemetaann?.nama,
       item.tanggal_pemetaan,
       item.tanggal_penyelesaian
     ].some(field => (field || '').toString().toLowerCase().includes(term))
@@ -342,12 +342,12 @@ const filteredData = computed(() => {
 
 // Data belum input petugas
 const filteredBelumInput = computed(() => {
-  return filteredData.value.filter(item => !item.petugas_pemetaan)
+  return filteredData.value.filter(item => !item.petugas_pemetaann)
 })
 
 // Data sudah input petugas
 const filteredSudahInput = computed(() => {
-  return filteredData.value.filter(item => item.petugas_pemetaan)
+  return filteredData.value.filter(item => item.petugas_pemetaann)
 })
 
 const deleteItem = async (id) => {

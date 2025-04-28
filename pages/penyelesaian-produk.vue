@@ -357,15 +357,55 @@ onMounted(() => {
 
 .popup-container {
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 30px 20px;
+  border-radius: 12px;
   width: 400px;
-  max-width: 100%;
+  max-width: 90%;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.popup-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.input-field {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .popup-actions {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
 }
+
+.submit-btn, .cancel-btn {
+  width: 120px;
+}
+
 
 .submit-btn,
 .cancel-btn {

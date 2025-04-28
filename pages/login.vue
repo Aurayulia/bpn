@@ -76,10 +76,12 @@ onMounted(async () => {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('/assets/img/login.jpg') no-repeat center center;
-  background-size: cover;
+  background: url('/assets/img/bpn.png') no-repeat center center;
+  background-size: cover; /* Sesuaikan ukuran gambar untuk menutupi seluruh layar */
+  background-position: center center; /* Menjaga posisi gambar tetap di tengah */
   flex-direction: column;
 }
+
 
 .login-container {
   background: rgba(255, 255, 255, 0.3);

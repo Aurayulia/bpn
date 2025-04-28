@@ -34,8 +34,8 @@
             <td :class="{ kosong: !loket.petugas_pemetaan }">{{ loket.petugas_pemetaan || 'Kosong' }}</td>
             <td :class="{ kosong: !loket.no302 }">{{ loket.no302 || 'Kosong' }}</td>
             <td :class="{ kosong: !loket.tanggal }">
-              {{ loket.tanggal ? formatTanggal(loket.tanggal) : 'Kosong' }}
-            </td>
+            {{ loket.tanggal ? formatTanggal(loket.tanggal) : 'Kosong' }}
+          </td>
             <td :class="{ kosong: !loket.tanggalp }">
               {{ loket.tanggalp ? formatTanggal(loket.tanggalp) : 'Kosong' }}
             </td>
@@ -362,11 +362,12 @@ onMounted(async () => {
 
 .popup-container {
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  border-radius: 12px;
   width: 400px;
-  max-width: 100%;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ 
 }
 
 /* Popup Actions */

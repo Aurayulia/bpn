@@ -34,7 +34,6 @@
               <th>No Sertifikat</th>
               <th>Kecamatan</th>
               <th>Kelurahan</th>
-              <th>Nama Pemohon</th>
               <th>Petugas Pemetaan</th>
               <th>Tanggal ke Pemetaan</th>
               <th>Keterangan</th>
@@ -61,8 +60,7 @@
               <td>{{ item.no_sertifikat }}</td>
               <td>{{ item.kecamatan?.nama_kecamatan }}</td>
               <td>{{ item.kelurahan?.nama_kelurahan }}</td>
-              <td>{{ item.nama_pemohon }}</td>
-              <td>{{ item.petugas_pemetaan?.nama }}</td>
+              <td>{{ item.petugas_pemetaann?.nama }}</td>
               <td>{{ formatDate(item.tanggal_pemetaan) }}</td>
               <td>{{ item.keterangan_relasi?.keterangan || '-' }}</td>
               <td>{{ item.tanggal_penyelesaian ? formatDate(item.tanggal_penyelesaian) : '-' }}</td>
@@ -125,8 +123,7 @@ const exportToExcel = () => {
     "No Sertifikat": item.no_sertifikat || '',
     "Kecamatan": item.kecamatan?.nama_kecamatan || '',
     "Kelurahan": item.kelurahan?.nama_kelurahan || '',
-    "Nama Pemohon": item.nama_pemohon || '',
-    "Petugas Pemetaan": item.petugas_pemetaan?.nama || '',
+    "Petugas Pemetaan": item.petugas_pemetaann?.nama || '',
     "Tanggal Ke Pemetaan": (item.tanggal_pemetaan) || '',
     "Keterangan": item.keterangan_relasi?.keterangan  || '',
     "Tanggal Penyelesaian": item.tanggal_penyelesaian || ''
@@ -162,7 +159,7 @@ const fetchData = async () => {
         *,
         kecamatan: kecamatan_id (id, nama_kecamatan),
         kelurahan: kelurahan_id (id, nama_kelurahan),
-        petugas_pemetaan: petugas_pemetaan_id (id, nama),
+        petugas_pemetaann: petugas_pemetaann_id (id, nama),
         keterangan_relasi: keterangan_id (id, keterangan)
     `)
 
@@ -184,7 +181,7 @@ const fetchDropdownData = async () => {
   if (!kelurahan.error) kelurahanList.value = kelurahan.data;
   else console.error('Error mengambil data kelurahan:', kelurahan.error);
 
-  const petugas = await supabase.from('petugas_pemetaan').select('id, nama');
+  const petugas = await supabase.from('petugas_pemetaann').select('id, nama');
   if (!petugas.error) petugasList.value = petugas.data;
   else console.error('Error mengambil data petugas:', petugas.error);
 
@@ -211,8 +208,7 @@ const filteredData = computed(() => {
       (item.no_sertifikat || '').toString().toLowerCase().includes(lowerSearch) ||
       (item.kecamatan?.nama_kecamatan || '').toLowerCase().includes(lowerSearch) ||
       (item.kelurahan?.nama_kelurahan || '').toLowerCase().includes(lowerSearch) ||
-      (item.nama_pemohon || '').toLowerCase().includes(lowerSearch) ||
-      (item.petugas_pemetaan?.nama || '').toLowerCase().includes(lowerSearch) ||
+      (item.petugas_pemetaann?.nama || '').toLowerCase().includes(lowerSearch) ||
       (item.keterangan_relasi?.keterangan || '').toLowerCase().includes(lowerSearch) ||
       (formatDate(item.tanggal_pemetaan) || '').toLowerCase().includes(lowerSearch) ||
       (formatDate(item.tanggal_penyelesaian) || '').toLowerCase().includes(lowerSearch)
